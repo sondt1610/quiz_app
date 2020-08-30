@@ -10,10 +10,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   logOut() async {
     await FirebaseAuth.instance.signOut().then((onValue) {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-            builder: (context) => LoginPage()),
+        MaterialPageRoute(builder: (context) => LoginPage()),
       );
     });
   }

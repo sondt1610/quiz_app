@@ -1,53 +1,42 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField(
-      {this.icon,
-        this.hint,
-        this.obsecure = false,
-        this.validator,
-        this.onSaved});
+  final String hintText;
+  final String initialValue;
   final Function onSaved;
-  final Icon icon;
-  final String hint;
   final bool obsecure;
   final Function validator;
+  final TextEditingController controller;
+
+  CustomTextField({
+    this.hintText,
+    this.initialValue= '',
+    this.onSaved,
+    this.obsecure = false,
+    this.validator,
+    this.controller
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 20, right: 20),
       child: TextFormField(
-        onSaved: onSaved,
-        validator: validator,
-        autofocus: true,
-        obscureText: obsecure,
-        style: TextStyle(
-          fontSize: 20,
-        ),
+        textAlign: TextAlign.center,
         decoration: InputDecoration(
-            hintStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            hintText: hint,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30),
-              borderSide: BorderSide(
-                color: Theme.of(context).primaryColor,
-                width: 2,
-              ),
+          hintText: hintText,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(32.0),
             ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30),
-              borderSide: BorderSide(
-                color: Theme.of(context).primaryColor,
-                width: 3,
-              ),
-            ),
-            prefixIcon: Padding(
-              child: IconTheme(
-                data: IconThemeData(color: Theme.of(context).primaryColor),
-                child: icon,
-              ),
-              padding: EdgeInsets.only(left: 30, right: 10),
-            )),
+          ),
+        ),
+        obscureText: obsecure,
+        initialValue: initialValue,
+//        controller: controller,
+        style: TextStyle(fontSize: 20, color: Colors.black),
+        cursorColor: Colors.black,
+        validator: validator,
+        onSaved: onSaved,
       ),
     );
   }
