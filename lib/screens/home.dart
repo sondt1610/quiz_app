@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:quiz_app/screens/create_quiz.dart';
 import 'package:quiz_app/screens/login_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,6 +34,14 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        body: Text('sdgsdgsd'));
+        body: Text('sdgsdgsd'),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => CreateQuiz()));
+        },
+      ),
+    );
   }
 }
