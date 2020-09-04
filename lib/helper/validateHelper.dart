@@ -4,7 +4,7 @@ class ValidatorHelper {
       return 'Email is required';
     }
     if (!RegExp(
-        r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+            r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
         .hasMatch(value)) {
       return 'Please enter a valid email address';
     }
@@ -18,6 +18,12 @@ class ValidatorHelper {
 
     if (value.length < 5 || value.length > 20) {
       return 'Password must be between 5 and 20 characters';
+    }
+    return null;
+  };
+  static Function stringValidator = (String value) {
+    if (value.isEmpty) {
+      return 'This field is required';
     }
     return null;
   };
