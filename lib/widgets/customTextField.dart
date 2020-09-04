@@ -8,14 +8,13 @@ class CustomTextField extends StatelessWidget {
   final Function validator;
   final TextEditingController controller;
 
-  CustomTextField({
-    this.hintText,
-    this.initialValue= '',
-    this.onSaved,
-    this.obsecure = false,
-    this.validator,
-    this.controller
-  });
+  CustomTextField(
+      {this.hintText,
+      this.initialValue = '',
+      this.onSaved,
+      this.obsecure = false,
+      this.validator,
+      this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class CustomTextField extends StatelessWidget {
         ),
         obscureText: obsecure,
         initialValue: initialValue,
-//        controller: controller,
+        controller: controller,
         style: TextStyle(fontSize: 20, color: Colors.black),
         cursorColor: Colors.black,
         validator: validator,

@@ -19,7 +19,7 @@ class FirestoreService {
     }).then((value) {
       var quizID = value.documentID;
       quiz.questionList.forEach((question) async {
-        await quizCollection.add({
+        await questionCollection.add({
           'quizID': quizID,
           'question': question.question,
           'option1': question.option1,
@@ -35,16 +35,18 @@ class FirestoreService {
   Future<List<Quiz>> getListQuiz() async {
     QuerySnapshot qShot = await quizCollection.getDocuments();
 
-    return qShot.documents
-        .map((doc) => Quiz(doc.data['imgUrl'], doc.data['title'],
-            doc.data['desc'], doc.documentID))
-        .toList();
+    return qShot.documents.map((doc) {
+      Quiz quiz =
+          new Quiz(doc.data['imgUrl'], doc.data['title'], doc.data['desc']);
+      quiz.documentID = doc.documentID;
+      return quiz;
+    }).toList();
   }
 
   Future<Quiz> getQuizByDocumentID(String documentID) async {
     await quizCollection.document(documentID).get().then((doc) async {
-      Quiz quiz = Quiz(doc.data['imgUrl'], doc.data['title'], doc.data['desc'],
-          doc.documentID);
+      Quiz quiz = Quiz(doc.data['imgUrl'], doc.data['title'], doc.data['desc']);
+      quiz.documentID = documentID;
       await getQuestionListByQuizDocumentID(doc.documentID)
           .then((questionList) {
         quiz.questionList = questionList;
