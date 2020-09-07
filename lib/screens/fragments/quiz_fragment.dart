@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:quiz_app/helper/validateHelper.dart';
 import 'package:quiz_app/widgets/customButton.dart';
 import 'package:quiz_app/widgets/customTextField.dart';
 
@@ -38,7 +39,7 @@ class _QuizFragment extends State<QuizFragment> {
               onSaved: (String value) {
                 title = value;
               },
-              validator: null,
+              validator: ValidatorHelper.stringValidator,
             ),
             SizedBox(
               height: 20.0,
@@ -48,7 +49,7 @@ class _QuizFragment extends State<QuizFragment> {
                 onSaved: (String value) {
                   desc = value;
                 },
-                validator: null),
+                validator: ValidatorHelper.stringValidator),
             SizedBox(
               height: 20.0,
             ),
@@ -57,7 +58,7 @@ class _QuizFragment extends State<QuizFragment> {
                 onSaved: (String value) {
                   imageURL = value;
                 },
-                validator: null),
+                validator: ValidatorHelper.stringValidator),
             SizedBox(
               height: 20.0,
             ),
@@ -67,6 +68,10 @@ class _QuizFragment extends State<QuizFragment> {
             CustomButton(
                 label: 'Next',
                 onPressed: () async {
+                  if (!_formKey.currentState.validate()) {
+                    return;
+                  }
+                  _formKey.currentState.save();
                   _formKey.currentState.save();
                   setStage(2);
                   setQuiz(title, desc, imageURL);

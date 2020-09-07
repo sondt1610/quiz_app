@@ -57,10 +57,11 @@ class _CreateQuizState extends State<CreateQuiz> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Create Quiz"),
-      ),
-      body: switchFunc(stage, setStage, setQuiz, addQuestion, getQuiz),
-    );
+        appBar: AppBar(
+          title: Text("Create Quiz"),
+        ),
+        body: SingleChildScrollView(
+          child: switchFunc(stage, setStage, setQuiz, addQuestion, getQuiz),
+        ));
   }
 }
