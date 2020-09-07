@@ -30,7 +30,7 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         obscureText: obsecure,
-        // initialValue: initialValue,
+//         initialValue: initialValue,
         controller: controller,
         style: TextStyle(fontSize: 20, color: Colors.black),
         cursorColor: Colors.black,
