@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:quiz_app/models/question.dart';
 import 'package:quiz_app/models/quiz.dart';
+import 'package:uuid/uuid.dart';
 
 class FirestoreService {
   FirestoreService();
@@ -12,12 +13,14 @@ class FirestoreService {
       Firestore.instance.collection('quiz');
 
   Future<void> addQuiz(Quiz quiz) async {
-    await quizCollection.add({
+    var uuid = Uuid();
+    String quizID = uuid.v4();
+    await quizCollection.document(quizID).setData({
       'imgUrl': quiz.imgUrl,
       'title': quiz.title,
       'desc': quiz.desc,
+      'quizID': quizID
     }).then((value) {
-      var quizID = value.documentID;
       quiz.questionList.forEach((question) async {
         await questionCollection.add({
           'quizID': quizID,
@@ -59,10 +62,11 @@ class FirestoreService {
   Future<List<Question>> getQuestionListByQuizDocumentID(
       String quizDocumentID) async {
     List<Question> questionList = new List<Question>();
-    await questionCollection.getDocuments().then((querySnapshot) {
+    questionList = await questionCollection.getDocuments().then((querySnapshot) {
+      List<Question> list = new List<Question>();
       querySnapshot.documents.forEach((result) {
         if (result.data['quizID'] == quizDocumentID) {
-          questionList.add(Question(
+          list.add(Question(
               result.data['question'],
               result.data['option1'],
               result.data['option2'],
@@ -71,6 +75,7 @@ class FirestoreService {
               result.data['correctOption']));
         }
       });
+      return list;
     });
     return questionList;
   }
