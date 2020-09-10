@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:quiz_app/helper/constaint.dart';
 import 'package:quiz_app/helper/validateHelper.dart';
 import 'package:quiz_app/screens/login_page.dart';
 import 'package:quiz_app/services/auth.dart';
@@ -27,10 +28,8 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: grayColor,
       key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text("Register Page"),
-      ),
       body: Center(
         child: ModalProgressHUD(
           inAsyncCall: showProgress,
@@ -43,9 +42,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "Registration",
-                    style:
-                        TextStyle(fontWeight: FontWeight.w800, fontSize: 20.0),
+                    "BAZZZ",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 55.0,
+                        color: blueColor),
                   ),
                   SizedBox(
                     height: 20.0,
@@ -75,7 +76,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     height: 20.0,
                   ),
                   CustomTextField(
-                    hintText: " Confirm Password",
+                    hintText: "Confirm Password",
 //                    initialValue: '123456',
                     obsecure: true,
                     validator: (String value) {
@@ -88,49 +89,53 @@ class _RegisterPageState extends State<RegisterPage> {
                   SizedBox(
                     height: 20.0,
                   ),
-                  CustomButton(
-                      label: 'Register',
-                      onPressed: () async {
-                        if (!_formKey.currentState.validate()) {
-                          return;
-                        }
-                        _formKey.currentState.save();
-                        setState(() {
-                          showProgress = true;
-                        });
-                        try {
-                          final userId = await _authService.signUp(email, password);
-                          if (userId != null) {
-                            Fluttertoast.showToast(
-                                msg: "Register Successfully",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.blueAccent,
-                                textColor: Colors.white,
-                                fontSize: 16.0);
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginPage()),
-                            );
-                            setState(() {
-                              showProgress = false;
-                            });
-                          } else {
-                            _scaffoldKey.currentState.showSnackBar(SnackBar(
-                              content: Text('Register failed'),
-                              duration: Duration(seconds: 3),
-                              backgroundColor: Colors.red,
-                            ));
-                            setState(() {
-                              showProgress = false;
-                            });
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: CustomButton(
+                        label: 'Register',
+                        onPressed: () async {
+                          if (!_formKey.currentState.validate()) {
+                            return;
                           }
-                        } catch (e) {
-                          print('SignUp error 2: ' + e.toString());
-                        }
-                      }),
+                          _formKey.currentState.save();
+                          setState(() {
+                            showProgress = true;
+                          });
+                          try {
+                            final userId =
+                                await _authService.signUp(email, password);
+                            if (userId != null) {
+                              Fluttertoast.showToast(
+                                  msg: "Register Successfully",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.blueAccent,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()),
+                              );
+                              setState(() {
+                                showProgress = false;
+                              });
+                            } else {
+                              _scaffoldKey.currentState.showSnackBar(SnackBar(
+                                content: Text('Register failed'),
+                                duration: Duration(seconds: 3),
+                                backgroundColor: Colors.red,
+                              ));
+                              setState(() {
+                                showProgress = false;
+                              });
+                            }
+                          } catch (e) {
+                            print('SignUp error 2: ' + e.toString());
+                          }
+                        }),
+                  ),
                   SizedBox(
                     height: 15.0,
                   ),

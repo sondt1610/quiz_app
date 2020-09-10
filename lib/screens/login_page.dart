@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:quiz_app/helper/constaint.dart';
 import 'package:quiz_app/helper/validateHelper.dart';
 import 'package:quiz_app/screens/home.dart';
 import 'package:quiz_app/screens/register.dart';
@@ -24,10 +25,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: grayColor,
       key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text("Login Page"),
-      ),
       body: Center(
         child: ModalProgressHUD(
           inAsyncCall: showProgress,
@@ -40,8 +39,11 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "Login Page",
-                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20.0),
+                    "BAZZZ",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 55.0,
+                        color: blueColor),
                   ),
                   SizedBox(
                     height: 20.0,
@@ -69,40 +71,44 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 20.0,
                   ),
-                  CustomButton(
-                    label: 'Login',
-                    width: 200.0,
-                    height: 50.0,
-                    onPressed: () async {
-                      if (!_formKey.currentState.validate()) {
-                        return;
-                      }
-                      _formKey.currentState.save();
-                      setState(() {
-                        showProgress = true;
-                      });
-                      try {
-                        final userId = await _authService.signIn(email, password);
-                        if (userId != null) {
-                          print('userId: ' + userId);
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                          );
-                        } else {
-                          _scaffoldKey.currentState.showSnackBar(SnackBar(
-                            content: Text('Account Info is wrong. Login failed'),
-                            duration: Duration(seconds: 3),
-                            backgroundColor: Colors.red,
-                          ));
-                          setState(() {
-                            showProgress = false;
-                          });
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: CustomButton(
+                      label: 'Login',
+                      onPressed: () async {
+                        if (!_formKey.currentState.validate()) {
+                          return;
                         }
-                      } catch (e) {
-                        print('SignIn error 2: ' + e.toString());
-                      }
-                    },
+                        _formKey.currentState.save();
+                        setState(() {
+                          showProgress = true;
+                        });
+                        try {
+                          final userId =
+                              await _authService.signIn(email, password);
+                          if (userId != null) {
+                            print('userId: ' + userId);
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                            );
+                          } else {
+                            _scaffoldKey.currentState.showSnackBar(SnackBar(
+                              content:
+                                  Text('Account Info is wrong. Login failed'),
+                              duration: Duration(seconds: 3),
+                              backgroundColor: Colors.red,
+                            ));
+                            setState(() {
+                              showProgress = false;
+                            });
+                          }
+                        } catch (e) {
+                          print('SignIn error 2: ' + e.toString());
+                        }
+                      },
+                    ),
                   ),
                   SizedBox(
                     height: 20.0,
@@ -111,7 +117,8 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Don\'t have an account? ',
-                          style: TextStyle(color: Colors.black87, fontSize: 17)),
+                          style:
+                              TextStyle(color: Colors.black87, fontSize: 17)),
                       GestureDetector(
                         onTap: () {
                           Navigator.pushReplacement(
