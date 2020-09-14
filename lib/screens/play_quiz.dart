@@ -15,16 +15,16 @@ class _PlayQuizState extends State<PlayQuiz> {
   var itemIndex = 0;
   var countCorrectAnswers = 0;
 
-  Function getNextQuestion(correctAnswer){
+  Function getNextQuestion(correctAnswer) {
     print('correctAnswer');
     print(correctAnswer);
     print(widget.questions.length);
-    if(correctAnswer == widget.questions[itemIndex].correctOption){
+    if (correctAnswer == widget.questions[itemIndex].correctOption) {
       setState(() {
         countCorrectAnswers = countCorrectAnswers + 1;
       });
     }
-    if(itemIndex + 1 == widget.questions.length) {
+    if (itemIndex + 1 == widget.questions.length) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => Result(countCorrectAnswers)),
@@ -41,15 +41,7 @@ class _PlayQuizState extends State<PlayQuiz> {
     print(widget.questions);
     //[0].question
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Play Quiz"),
-      ),
-      body: Column(
-        children: <Widget>[
-          Text('fsdsd'),
-          OneQuestion(widget.questions[itemIndex], getNextQuestion)
-        ],
-      ),
+      body: OneQuestion(widget.questions[itemIndex], getNextQuestion),
     );
   }
 }

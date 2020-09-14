@@ -143,8 +143,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Already Registered? ",
-                          style:
-                              TextStyle(color: Colors.black87, fontSize: 17)),
+                          style: TextStyle(color: blueColor, fontSize: 17)),
                       GestureDetector(
                         onTap: () {
                           Navigator.pushReplacement(
@@ -156,7 +155,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         child: Container(
                           child: Text('Login Now',
                               style: TextStyle(
-                                  color: Colors.black87,
+                                  color: blueColor,
                                   decoration: TextDecoration.underline,
                                   fontSize: 17)),
                         ),
