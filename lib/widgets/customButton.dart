@@ -7,6 +7,7 @@ class CustomButton extends StatelessWidget {
   final Color color;
   final double width;
   final double height;
+  final double fontSize;
 
   CustomButton({
     this.label = 'Button Text',
@@ -14,6 +15,7 @@ class CustomButton extends StatelessWidget {
     this.color = Colors.lightBlue,
     this.width = 280.0,
     this.height = 60.0,
+    this.fontSize = 30.0,
   });
 
   @override
@@ -53,7 +55,7 @@ class CustomButton extends StatelessWidget {
                   child: Text(label,
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 30.0,
+                          fontSize: fontSize,
                           color: Colors.white)),
                 ),
               ),

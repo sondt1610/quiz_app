@@ -117,8 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Don\'t have an account? ',
-                          style:
-                              TextStyle(color: Colors.black87, fontSize: 17)),
+                          style: TextStyle(color: blueColor, fontSize: 17)),
                       GestureDetector(
                         onTap: () {
                           Navigator.pushReplacement(
@@ -130,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Container(
                           child: Text('Sign Up',
                               style: TextStyle(
-                                  color: Colors.black87,
+                                  color: blueColor,
                                   decoration: TextDecoration.underline,
                                   fontSize: 17)),
                         ),
