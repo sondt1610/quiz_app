@@ -172,15 +172,14 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Positioned(
+                top: 20,
+                right: 0,
                 child: Container(
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: FlatButton(
-                      onPressed: () => {logOut()},
-                      child: Text(
-                        "Logout",
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
+                  child: FlatButton(
+                    onPressed: () => {logOut()},
+                    child: Text(
+                      "Logout",
+                      style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   ),
                 ),

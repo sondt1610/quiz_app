@@ -71,6 +71,7 @@ class OneQuestion extends StatelessWidget {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.only(top: 150),
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   child: Text(
                     question.question,
                     style: TextStyle(
@@ -80,7 +81,7 @@ class OneQuestion extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 180),
+                  margin: EdgeInsets.only(top: size.height * 0.1),
                   child: Row(
                     children: [
                       CustomButton2(
